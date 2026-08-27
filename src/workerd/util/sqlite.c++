@@ -1858,6 +1858,8 @@ struct SqliteDatabase::Vfs::WrappedNativeFileImpl: public sqlite3_file {
   static const sqlite3_io_methods METHOD_TABLE;
 };
 
+#pragma clang attribute push(__attribute__((no_sanitize("cfi"), noinline)), apply_to=function)
+
 // This completely nutso template generates wrapper functions for each of the function pointer
 // members of sqlite3_vfs. The wrapper function temporarily sets `currentVfsRoot` to the FD
 // of the directory from the SqliteDatabase::Vfs instance in use, then invokes the same function
@@ -2043,6 +2045,7 @@ sqlite3_vfs SqliteDatabase::Vfs::makeWrappedNativeVfs() {
   };
 }
 #endif  // #if !_WIN32
+#pragma clang attribute pop
 
 // -----------------------------------------------------------------------------
 // Code to implement a true SQLite VFS based on `kj::Directory`.
