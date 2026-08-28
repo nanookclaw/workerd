@@ -720,6 +720,7 @@ wd_test(
 )
 
 wd_test(
+    size = "large",
     src = "scheduler-test.wd-test",
     args = ["--experimental"],
     data = ["scheduler-test.js"],
@@ -1220,7 +1221,7 @@ wd_test(
 )
 
 wd_test(
-    size = "large",
+    size = "enormous",
     src = "worker-loader-test.wd-test",
     args = ["--experimental"],
     data = ["worker-loader-test.js"],
